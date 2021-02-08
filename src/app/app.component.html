@@ -1,0 +1,84 @@
+<section class="cruds">
+  <h3>add data</h3>
+  <div class="" style="display: inline-block;">
+    <ul class="nav subform">
+      <li><input type="text" [(ngModel)]="name" placeholder="name..." class="form-control"></li>
+      <li><input type="number" [(ngModel)]="age" placeholder="age..." min="1" class="form-control"></li>
+      <li><input type="text" [(ngModel)]="country" placeholder="country..." class="form-control"></li>
+      <li><button class="btn btn-primary" (click)="subdata($event)">add datas</button></li>
+    </ul>
+  </div>
+
+  <h3>query</h3>
+  <button class="btn btn-primary">query all</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>name</td>
+        <td>age</td>
+        <td>country</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody class="datalist">
+      <tr *ngFor="let useritem of userarr">
+        <td style="display: none;">{{useritem._id}}</td>
+        <td>{{useritem.name}}</td>
+        <td>{{useritem.age}}</td>
+        <td>{{useritem.country}}</td>
+        <td class="buttonstyle">
+          <button class="btn btn-primary" data-toggle="modal" data-target="#updateinfo" (click)="updateinfo($event)" >update</button>
+          <button class="btn btn-danger" (click)="deletethis($event)">delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</section>
+
+<div [ngStyle]="{'z-index': loadindex,'background-color':loadback,'display':disrate}" class="loadpostion">
+  <div class="loading dual-ring">
+
+  </div>
+</div>
+
+<div class="modal fade" id="updateinfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">update datas</h4>
+      </div>
+      <div class="modal-body">
+        <ul id="modaldatas" class="nav">
+          <!-- updateid -->
+          <li>
+            <input class="form-control" style="display: none;" disabled [(ngModel)]="updateid" type="text"
+              placeholder="name...">
+          </li>
+          <li>
+            <input class="form-control" [(ngModel)]="updatename" type="text"
+              placeholder="name...">
+          </li>
+          <li>
+            <input class="form-control" [(ngModel)]="updateage" type="number" min="1"
+              placeholder="age...">
+          </li>
+          <li>
+            <input class="form-control" [(ngModel)]="updatecountry" type="text"
+              placeholder="country...">
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" style="outline: none;" class="btn btn-default" id="skillclose"
+          data-dismiss="modal">Close</button>
+        <button type="button" [disabled]="diskill" (click)="updatethis($event)" style="outline: none;"
+          data-dismiss="modal" class="btn btn-success">update data</button>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
